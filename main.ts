@@ -2,11 +2,16 @@ import { Knobelscheit } from "./knobelscheit.ts";
 import { rollTwice } from "./dice.ts";
 
 const knobelscheit = new Knobelscheit();
-let turns = 0;
+let turns: number = 0;
+let rollNeeded: boolean = true;
+let diceNumber: number = 0;
 
 while (!knobelscheit.isAllFlipped()) {
-  const diceNumber = rollTwice();
-  turns++;
+  if (rollNeeded) {
+    diceNumber = rollTwice();
+    turns++;
+    rollNeeded = false;
+  }
 
   const state = knobelscheit.inspect();
   console.log(state);
@@ -25,20 +30,26 @@ while (!knobelscheit.isAllFlipped()) {
     console.log("Picks don't match dice roll.");
     continue;
   }
-
+  let mustRetry: boolean = false;
   for (const pick of picks) {
     if (pick < 1 || pick > 9) {
       console.log(`Pick ${pick} is out of range.`);
-      continue;
+      mustRetry = true;
+      break;
     }
     if (knobelscheit.isFlipped(pick)) {
       console.log(`Pick ${pick} is already flipped.`);
-      continue;
+      mustRetry = true;
+      break;
     }
+  }
+  if (mustRetry) {
+    continue;
   }
 
   for (const pick of picks) {
     knobelscheit.flip(pick);
   }
+  rollNeeded = true;
 }
 console.log(`You took ${turns} turns.`);
