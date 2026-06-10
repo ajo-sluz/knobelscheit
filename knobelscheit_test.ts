@@ -46,3 +46,28 @@ Deno.test("flip numbers randomly", () => {
     }
   }
 });
+
+Deno.test("Test: inital state not finished.", () => {
+  //Arrange
+  const scheit = new Knobelscheit();
+
+  //Act
+  const finished = scheit.isAllFlipped();
+
+  //Assert
+  assertEquals(finished, false);
+});
+
+Deno.test("Test: final state finished.", () => {
+  //Arrange
+  const scheit = new Knobelscheit();
+  for (let i = 1; i <= 9; i++) {
+    scheit.flip(i);
+  }
+
+  //Act
+  const finished = scheit.isAllFlipped();
+
+  //Assert
+  assertEquals(finished, true);
+});

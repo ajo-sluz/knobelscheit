@@ -27,4 +27,13 @@ export class Knobelscheit {
       return true;
     }
   }
+
+  public isAllFlipped(): boolean {
+    for (const s of this.state) {
+      if (!s) {
+        return false;
+      }
+    }
+    return true;
+  }
 }
