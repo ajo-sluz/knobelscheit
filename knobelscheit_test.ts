@@ -24,3 +24,25 @@ Deno.test("inspect state", () => {
     ]),
   );
 });
+
+Deno.test("flip numbers randomly", () => {
+  // Arrange
+  const knobelscheit = new Knobelscheit();
+
+  for (let i = 0; i < 20; i++) {
+    // Act
+    const random = Math.floor(Math.random() * 9) + 1;
+    const before = knobelscheit.inspect().get(random);
+    const turned = knobelscheit.flip(random);
+    const after = knobelscheit.inspect().get(random);
+
+    // Arrange
+    if (turned) {
+      assertEquals(before, false);
+      assertEquals(after, true);
+    } else {
+      assertEquals(before, true);
+      assertEquals(after, true);
+    }
+  }
+});

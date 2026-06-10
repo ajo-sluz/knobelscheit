@@ -18,4 +18,13 @@ export class Knobelscheit {
     }
     return stateByNumber;
   }
+
+  public flip(number: number): boolean {
+    if (this.state[number - 1]) {
+      return false;
+    } else {
+      this.state[number - 1] = true;
+      return true;
+    }
+  }
 }
