@@ -71,3 +71,15 @@ Deno.test("Test: final state finished.", () => {
   //Assert
   assertEquals(finished, true);
 });
+
+Deno.test("Check if flipped.", () => {
+  //Arrange
+  const scheit = new Knobelscheit();
+
+  //Act
+  scheit.flip(5);
+
+  //Assert
+  assertEquals(scheit.isFlipped(5), true);
+  assertEquals(scheit.isFlipped(6), false);
+});

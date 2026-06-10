@@ -36,4 +36,8 @@ export class Knobelscheit {
     }
     return true;
   }
+
+  public isFlipped(num: number): boolean {
+    return this.state[num - 1];
+  }
 }
